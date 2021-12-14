@@ -45,6 +45,11 @@ class User
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=TodoList::class, mappedBy="userId", cascade={"persist", "remove"})
+     */
+    private $todoList;
+
     public function isValid(): bool
     {
         return !empty($this->email)
@@ -130,6 +135,23 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getTodoList(): ?TodoList
+    {
+        return $this->todoList;
+    }
+
+    public function setTodoList(TodoList $todoList): self
+    {
+        // set the owning side of the relation if necessary
+        if ($todoList->getUserId() !== $this) {
+            $todoList->setUserId($this);
+        }
+
+        $this->todoList = $todoList;
 
         return $this;
     }
