@@ -46,7 +46,7 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=TodoList::class, mappedBy="userId", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=TodoList::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $todoList;
 
