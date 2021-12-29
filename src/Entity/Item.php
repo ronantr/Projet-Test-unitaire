@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Item
 {
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -18,7 +19,7 @@ class Item
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -33,10 +34,19 @@ class Item
      */
     private $todoList;
 
-    // function isValid()
-    // {
-    //     return strlen($this->content) <= 1000;
-    // }
+    /**
+ * @Gedmo\Timestampable(on="create")
+ * @ORM\Column(type="datetime")
+ */
+private $createdAt;
+
+
+    public function validList(): bool
+    {
+        return !empty($this->name)
+            && !empty($this->content)
+            && !strlen($this->content) <=1000
+    }
 
 
     public function getId(): ?int
@@ -79,4 +89,20 @@ class Item
 
         return $this;
     }
+
+    /**
+ * @return \DateTime
+ */
+public function getCreatedAt()
+{
+    return $this->createdAt;
+}
+
+/**
+ * @return \DateTime
+ */
+public function getUpdatedAt()
+{
+    return $this->updatedAt;
+}
 }

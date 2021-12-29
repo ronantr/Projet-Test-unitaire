@@ -36,12 +36,12 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
     private $birthday;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
@@ -147,8 +147,8 @@ class User
     public function setTodoList(TodoList $todoList): self
     {
         // set the owning side of the relation if necessary
-        if ($todoList->getUserId() !== $this) {
-            $todoList->setUserId($this);
+        if ($todoList->getUser() !== $this) {
+            $todoList->setUser($this);
         }
 
         $this->todoList = $todoList;
