@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  test:
+    name: Check that the exercises are all passing the unit tests
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker-compose build --pull --no-cache
+    - name:   Installation
+      run: docker-compose up -d
+    - name: Test
+      run: docker-compose run --rm --user root -T npm test
