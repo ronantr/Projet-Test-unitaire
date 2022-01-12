@@ -19,4 +19,4 @@ jobs:
     - name:   Installation
       run: docker-compose up -d
     - name:  Run phpunit
-      run: docker-compose exec php phpunits
+      run: docker-compose exec php bin/console phpunit
