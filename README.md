@@ -20,7 +20,7 @@ docker-compose build --pull --no-cache
 ```sh
 docker-compose up -d
 ```
-``sh
+```sh
 ìl faut mettre le db.sql dans le adminer pour les fakes info http://localhost:8080
 Système : PostgreSQL
 Serveur : db
